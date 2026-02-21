@@ -1,0 +1,84 @@
+{
+  "name": "@orca-pt/orca-components",
+  "version": "1.0.7",
+  "description": "Orca native components for rendering special content markers in Vue applications",
+  "type": "module",
+  "main": "./dist/orca-components.umd.js",
+  "module": "./dist/orca-components.es.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/orca-components.es.js",
+      "require": "./dist/orca-components.umd.cjs"
+    },
+    "./style.css": "./dist/orca-components.css"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && npm run build:types",
+    "build:types": "vue-tsc --project tsconfig.build.json",
+    "preview": "vite preview",
+    "type-check": "vue-tsc --noEmit",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "version:sync": "node -e \"const fs=require('fs');const pkg=JSON.parse(fs.readFileSync('package.json'));const index=fs.readFileSync('src/index.ts','utf8');const updated=index.replace(/version: \\\"[\\d.]+\\\"/,`version: \\\"${pkg.version}\\\"`);fs.writeFileSync('src/index.ts',updated);console.log('✅ Synced version to',pkg.version);\"",
+    "version:patch": "npm version patch --no-git-tag-version && npm run version:sync",
+    "version:minor": "npm version minor --no-git-tag-version && npm run version:sync",
+    "version:major": "npm version major --no-git-tag-version && npm run version:sync",
+    "dev:install": "npm run build && npm pack && cd ../teams/gptclone-panel && pnpm remove @orcapt/orca-components && pnpm add ../../lexia-components-package/orca-orca-components-1.0.0.tgz",
+    "quick-deploy": "npm run build && npm pack && cd ../teams/gptclone-panel && pnpm remove @orcapt/orca-components && pnpm add ../../lexia-components-package/orca-orca-components-1.0.0.tgz && echo '✅ Package deployed successfully!'"
+  },
+  "peerDependencies": {
+    "pinia": "^3.0.0",
+    "vue": "^3.5.0",
+    "vue-router": "^4.2.0",
+    "vuetify": "^3.8.0"
+  },
+  "dependencies": {
+    "@videojs-player/vue": "^1.0.0",
+    "dompurify": "^3.3.1",
+    "highlight.js": "^11.11.1",
+    "katex": "^0.16.22",
+    "markdown-it": "^14.1.0",
+    "markdown-it-katex": "^2.0.3",
+    "markdown-it-link-attributes": "^4.0.1",
+    "video.js": "^7.21.7"
+  },
+  "devDependencies": {
+    "@types/dompurify": "^3.0.5",
+    "@types/markdown-it": "^13.0.7",
+    "@types/node": "^20.10.0",
+    "@vitejs/plugin-vue": "^5.0.0",
+    "@vitest/ui": "^4.0.16",
+    "@vue/tsconfig": "^0.5.0",
+    "autoprefixer": "^10.4.16",
+    "happy-dom": "^20.0.11",
+    "sass": "^1.69.5",
+    "tailwindcss": "^3.4.0",
+    "terser": "^5.44.1",
+    "typescript": "^5.3.3",
+    "vite": "^6.2.2",
+    "vitest": "^4.0.16",
+    "vue": "^3.5.13",
+    "vue-tsc": "^3.1.8",
+    "vuetify": "^3.8.1"
+  },
+  "peerDependenciesMeta": {
+    "postcss": {
+      "optional": true
+    }
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  }
+}
